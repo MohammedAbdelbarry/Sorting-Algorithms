@@ -1,17 +1,16 @@
+#ifndef Sortings_H
+#define Sortings_H
 #include <vector>
 #include <iostream>
 #include <iterator>
-
-template<typename Iterator, typename Comparator>
-void heapSort(Iterator first, Iterator last, Comparator comparator) {
+#include <algorithm>
+#include "Heap.h"
+template<typename RandomAccessIterator, typename Comparator>
+void heapSort(RandomAccessIterator first, RandomAccessIterator last, Comparator comparator) {
     auto origLast = last;
-    using Type = typename std::iterator_traits<Iterator>::value_type;
+    using Type = typename std::iterator_traits<RandomAccessIterator>::value_type;
     Heap<Type, Comparator> heap;
     heap.buildHeap(first, last);
-    for (auto it = first ; it < last ; it++) {
-        std::cout << *it << ' ';
-    }
-    std::cout << std::endl;
     int size = last - first;
     for (int i = size - 1; i > 0; i--) {
         Type temp = first[0];
@@ -19,8 +18,11 @@ void heapSort(Iterator first, Iterator last, Comparator comparator) {
         first[i] = temp;
         heap.heapify(first, --last, first);
     }
-    for (auto it = first ; it < origLast ; it++) {
-        std::cout << *it << ' ';
-    }
-    std::cout << std::endl;
+    std::reverse(first, origLast);
 }
+template<typename RandomAccessIterator>
+void heapSort(RandomAccessIterator first, RandomAccessIterator last) {
+    using Type = typename std::iterator_traits<RandomAccessIterator>::value_type;
+    heapSort(first, last, std::less<Type>());
+}
+#endif // Sortings_H

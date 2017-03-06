@@ -1,33 +1,24 @@
 #include <vector>
+#include <iostream>
 #ifndef Heap_H
 #define Heap_H
-template<typename Type, typename Comparator>
+
+/*
+* Heap Class Declaration
+*/
+template<typename Type, typename Comparator =  std::greater_equal<Type>>
 class Heap {
 public:
-    Heap();
-    //Heap(Type[] arr);
-    inline int size() {
-        return heap.size();
-    }
-    template<typename Iterator>
-    void heapify(Iterator first, Iterator last, Iterator position);
+    template<typename RandomAccessIterator>
+    void heapify(RandomAccessIterator first, RandomAccessIterator last, RandomAccessIterator position);
     /**
     * Builds a Heap.
     */
-    template<typename Iterator>
-    void buildHeap(Iterator first, Iterator last);
-    /**
-    * Builds a Heap and assigns it to the internal Array.
-    */
-    template<typename Iterator>
-    void makeHeap(Iterator first, Iterator last);
-    Type extractRoot();
-    Type getRoot();
-    void insert(Type element);
-    void modify(int index, Type key);
-    //~Heap();
+    template<typename RandomAccessIterator>
+    void buildHeap(RandomAccessIterator first, RandomAccessIterator last);
+    template<typename RandomAccessIterator>
+    void shiftUp(RandomAccessIterator first, RandomAccessIterator position);
 private:
-    std::vector<Type> heap;
     Comparator comparator;
     inline int parent(int index) {
         return (index - 1) >> 1;
@@ -38,6 +29,60 @@ private:
     inline int right(int index) {
         return (index << 1) + 2;
     }
-    void shiftUp(int index);
 };
+
+/*
+* Heap Class Implementation
+*/
+
+template<typename Type, typename Comparator>
+template<typename RandomAccessIterator>
+void Heap<Type, Comparator>::heapify(RandomAccessIterator first, RandomAccessIterator last, RandomAccessIterator position) {
+    int index = position - first;
+    int size = last - first;
+    if (index < 0) {
+        return;
+    }
+    int left = this->left(index);
+    int right = this->right(index);
+    int largest = index;
+    if (left <  size && !comparator(first[index], first[left])) {
+        largest = left;
+    }
+    if (right < size && !comparator(first[largest], first[right])) {
+        largest = right;
+    }
+    if (largest != index) {
+        Type temp = first[largest];
+        first[largest] = first[index];
+        first[index] = temp;
+        heapify(first, last, first + largest);
+    }
+}
+
+template<typename Type, typename Comparator>
+template<typename RandomAccessIterator>
+void Heap<Type, Comparator>::buildHeap(RandomAccessIterator first, RandomAccessIterator last) {
+    int size = last - first;
+    for (int i = (size - 1) >> 1; i >= 0; i--) {
+        heapify(first, last, first + i);
+    }
+}
+
+template<typename Type, typename Comparator>
+template<typename RandomAccessIterator>
+void Heap<Type, Comparator>::shiftUp(RandomAccessIterator first, RandomAccessIterator position) {
+    int index = position - first;
+    if (index < 0) {
+        return;
+    }
+    int parent = this->parent(index);
+    if (!comparator(first[parent], first[index])) {
+        int temp = first[parent];
+        first[parent] = first[index];
+        first[index] = temp;
+        shiftUp(first, first + parent);
+    }
+}
+
 #endif // Heap_H
