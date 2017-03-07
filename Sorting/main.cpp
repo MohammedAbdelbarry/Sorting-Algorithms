@@ -1,8 +1,17 @@
+#define all(c) begin(c), end(c)
 #include <iostream>
 #include "Sortings.h"
 #include "PriorityQueue.h"
 #include "Heap.h"
 using namespace std;
+
+template<typename Iterator>
+void printRange(Iterator first, Iterator last) {
+    for (auto it = first ; it < last ; it++) {
+        cout << *it << ' ';
+    }
+    cout << endl;
+}
 
 int main()
 {
@@ -13,13 +22,11 @@ int main()
     vec.push_back(3);
     vec.push_back(4);
     vec.push_back(-19);
-    for (int el : vec)
-        cout << el << ' ';
-    cout << endl;
+    printRange(all(vec));
+    bubbleSort(all(vec), greater<int>());
+    printRange(all(vec));
     heapSort(vec.begin(), vec.end());
-    for (int el : vec)
-        cout << el << ' ';
-    cout << endl;
+    printRange(all(vec));
     PriorityQueue<int, greater_equal<int>> pq(vec.begin(), vec.end());
     for (auto el : vec) {
         cout << pq.extractRoot() << ' ';

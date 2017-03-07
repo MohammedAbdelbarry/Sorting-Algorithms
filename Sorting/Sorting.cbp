@@ -32,8 +32,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="Heap.cpp" />
 		<Unit filename="Heap.h" />
+		<Unit filename="PriorityQueue.h" />
 		<Unit filename="Sortings.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
