@@ -28,7 +28,7 @@ int main()
     printRange(all(vec));
     heapSort(vec.begin(), vec.end());
     printRange(all(vec));
-    PriorityQueue<int, greater_equal<int>> pq(vec.begin(), vec.end());
+    PriorityQueue<int, greater_equal<int>> pq(all(vec));
     for (auto el : vec) {
         cout << pq.extractRoot() << ' ';
     }

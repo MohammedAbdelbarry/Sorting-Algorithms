@@ -1,4 +1,7 @@
 Sorting/bin/
 Sorting/obj/
+Sorting/html/
+Sorting/latex/
+*.dox
 *.depend
 *.layout

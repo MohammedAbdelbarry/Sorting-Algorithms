@@ -6,6 +6,16 @@
 #include <algorithm>
 #include "Heap.h"
 /**
+* @mainpage Sorting Algorithms
+* The implementation of some basic sorting algorithms in C++
+*/
+/**
+* @file Sortings.h
+* A header file containing the implementation of some sorting
+* algorithms.
+* @author Mohammed Abdelbarry.
+*/
+/**
 * Swaps *first with *second.
 * @param first The first iterator.
 * @param second The second iterator.
@@ -20,7 +30,6 @@ void swapIteratorData(Iterator first, Iterator second) {
 * Sorts the range [first, last[ using heap sort algorithm.
 * Runs in O(nlogn) in the average case and O(nlogn) in the worst case.
 * Has a space complexity of O(1).
-* This function should only be used for educational purposes.
 * @param first An iterator pointing to the first element in the
 * range.
 * @param last An iterator pointing to the element that comes after the last element
@@ -47,7 +56,6 @@ void heapSort(RandomAccessIterator first, RandomAccessIterator last, Comparator 
 * Sorts the range [first, last[ using heap sort algorithm.
 * Runs in O(nlogn) in the average case and O(nlogn) in the worst case.
 * Has a space complexity of O(1).
-* This function should only be used for educational purposes.
 * @param first An iterator pointing to the first element in the
 * range.
 * @param last An iterator pointing to the element that comes after the last element
@@ -62,7 +70,6 @@ void heapSort(RandomAccessIterator first, RandomAccessIterator last) {
 * Sorts the range [first, last[ using selection sort algorithm.
 * Runs in O(n^2) in the average case and O(n^2) in the worst case.
 * Has a space complexity of O(1).
-* This function should only be used for educational purposes.
 * @param first An iterator pointing to the first element in the
 * range.
 * @param last An iterator pointing to the element that comes after the last element
@@ -86,7 +93,6 @@ void selectionSort(RandomAccessIterator first, RandomAccessIterator last, Compar
 * Sorts the range [first, last[ using selection sort algorithm.
 * Runs in O(n^2) in the average case and O(n^2) in the worst case.
 * Has a space complexity of O(1).
-* This function should only be used for educational purposes.
 * @param first An iterator pointing to the first element in the
 * range.
 * @param last An iterator pointing to the element that comes after the last element
@@ -101,7 +107,6 @@ void selectionSort(RandomAccessIterator first, RandomAccessIterator last) {
 * Sorts the range [first, last[ using insertion sort algorithm.
 * Runs in O(n^2) in the average case and O(n^2) in the worst case.
 * Has a space complexity of O(1).
-* This function should only be used for educational purposes.
 * @param first An iterator pointing to the first element in the
 * range.
 * @param last An iterator pointing to the element that comes after the last element
@@ -123,7 +128,6 @@ void insertionSort(RandomAccessIterator first, RandomAccessIterator last, Compar
 * Sorts the range [first, last[ using insertion sort algorithm.
 * Runs in O(n^2) in the average case and O(n^2) in the worst case.
 * Has a space complexity of O(1).
-* This function should only be used for educational purposes.
 * @param first An iterator pointing to the first element in the
 * range.
 * @param last An iterator pointing to the element that comes after the last element
@@ -138,7 +142,6 @@ void insertionSort(RandomAccessIterator first, RandomAccessIterator last) {
 * Sorts the range [first, last[ using bubble sort algorithm.
 * Runs in O(n^2) in the average case and O(n^2) in the worst case.
 * Has a space complexity of O(1).
-* This function should only be used for educational purposes.
 * @param first An iterator pointing to the first element in the
 * range.
 * @param last An iterator pointing to the element that comes after the last element
@@ -163,7 +166,6 @@ void bubbleSort(RandomAccessIterator first, RandomAccessIterator last, Comparato
 * Sorts the range [first, last[ using bubble sort algorithm.
 * Runs in O(n^2) in the average case and O(n^2) in the worst case.
 * Has a space complexity of O(1).
-* This function should only be used for educational purposes.
 * @param first An iterator pointing to the first element in the
 * range.
 * @param last An iterator pointing to the element that comes after the last element
@@ -221,13 +223,13 @@ void merge(Iterator first, Iterator mid, Iterator last, Comparator comparator) {
 * Sorts the range [first, last[ using merge sort algorithm.
 * Runs in O(nlogn) in the average case and O(nlogn) in the worst case.
 * Has a space complexity of O(n).
-* This function should only be used for educational purposes.
 * @param first An iterator pointing to the first element in the
 * range.
 * @param last An iterator pointing to the element that comes after the last element
 * in the range.
 * @param comparator The comparator boolean function used to compare each two elements
 * while sorting.
+* @see merge();
 */
 template<typename RandomAccessIterator, typename Comparator>
 void mergeSort(RandomAccessIterator first, RandomAccessIterator last, Comparator comparator) {
@@ -243,11 +245,11 @@ void mergeSort(RandomAccessIterator first, RandomAccessIterator last, Comparator
 * Sorts the range [first, last[ using merge sort algorithm.
 * Runs in O(nlogn) in the average case and O(nlogn) in the worst case.
 * Has a space complexity of O(n).
-* This function should only be used for educational purposes.
 * @param first An iterator pointing to the first element in the
 * range.
 * @param last An iterator pointing to the element that comes after the last element
 * in the range.
+* @see merge()
 */
 template<typename RandomAccessIterator>
 void mergeSort(RandomAccessIterator first, RandomAccessIterator last) {
@@ -323,6 +325,7 @@ RandomAccessIterator lomutoPartitioning(RandomAccessIterator first, RandomAccess
 * in the range.
 * @param comparator The comparator boolean function used to compare each two elements
 * while sorting.
+* @see lomutoPartitioning()
 */
 template<typename RandomAccessIterator, typename Comparator>
 void quickSort(RandomAccessIterator first, RandomAccessIterator last, Comparator comparator) {
@@ -339,6 +342,7 @@ void quickSort(RandomAccessIterator first, RandomAccessIterator last, Comparator
 * range.
 * @param last An iterator pointing to the element that comes after the last element
 * in the range.
+* @see lomutoPartitioning()
 */
 template<typename RandomAccessIterator>
 void quickSort(RandomAccessIterator first, RandomAccessIterator last) {
