@@ -22,8 +22,9 @@ int main()
     vec.push_back(3);
     vec.push_back(4);
     vec.push_back(-19);
+    vec.push_back(50);
     printRange(all(vec));
-    bubbleSort(all(vec), greater<int>());
+    quickSort(all(vec), greater<int>());
     printRange(all(vec));
     heapSort(vec.begin(), vec.end());
     printRange(all(vec));
