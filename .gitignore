@@ -2,6 +2,8 @@ Sorting/bin/
 Sorting/obj/
 Sorting/html/
 Sorting/latex/
+Datasets/
+Performance/
 *.dox
 *.depend
 *.layout

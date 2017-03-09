@@ -41,6 +41,13 @@ public:
         return queue.size();
     }
     /**
+    * Checks whether a priority queue is empty or not.
+    * @return A boolean indicating whether the priority queue is empty or not.
+    */
+    inline bool isEmpty() {
+        return queue.empty();
+    }
+    /**
     * Copies a range of elements into the priority queue.
     * @param first An iterator pointing to the first element in the
     * range.
@@ -52,6 +59,7 @@ public:
     /**
     * Removes and returns the root of the priority queue.
     * @return The value at the root of the priority queue.
+    * @throw std::underflow_error When the priority queue is empty.
     */
     Type extractRoot();
     /**
