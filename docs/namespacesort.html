@@ -138,6 +138,18 @@ Functions</h2></td></tr>
 <tr class="memitem:ac98adbfa9b71cee23c7058130153a7f8"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesort.html#ac98adbfa9b71cee23c7058130153a7f8">quickSort</a> (RandomAccessIterator first, RandomAccessIterator last)</td></tr>
 <tr class="memdesc:ac98adbfa9b71cee23c7058130153a7f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sorts the range [first, last[ using quick sort algorithm.  <a href="#ac98adbfa9b71cee23c7058130153a7f8">More...</a><br /></td></tr>
 <tr class="separator:ac98adbfa9b71cee23c7058130153a7f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe7e05b478c4cc520be65188e13bceef"><td class="memTemplParams" colspan="2">template&lt;typename RandomAccessIterator , typename Comparator &gt; </td></tr>
+<tr class="memitem:abe7e05b478c4cc520be65188e13bceef"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesort.html#abe7e05b478c4cc520be65188e13bceef">introSort</a> (RandomAccessIterator first, RandomAccessIterator last, Comparator comparator, int remRecursionDepth)</td></tr>
+<tr class="memdesc:abe7e05b478c4cc520be65188e13bceef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sorts the range [first, last[ using intro sort algorithm.  <a href="#abe7e05b478c4cc520be65188e13bceef">More...</a><br /></td></tr>
+<tr class="separator:abe7e05b478c4cc520be65188e13bceef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9b66d661d74f8a2b3337b4aafe8a4b0"><td class="memTemplParams" colspan="2">template&lt;typename RandomAccessIterator &gt; </td></tr>
+<tr class="memitem:ab9b66d661d74f8a2b3337b4aafe8a4b0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesort.html#ab9b66d661d74f8a2b3337b4aafe8a4b0">introSort</a> (RandomAccessIterator first, RandomAccessIterator last)</td></tr>
+<tr class="memdesc:ab9b66d661d74f8a2b3337b4aafe8a4b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sorts the range [first, last[ using intro sort algorithm.  <a href="#ab9b66d661d74f8a2b3337b4aafe8a4b0">More...</a><br /></td></tr>
+<tr class="separator:ab9b66d661d74f8a2b3337b4aafe8a4b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbdb25eefda43c164a26b58c7e845798"><td class="memTemplParams" colspan="2">template&lt;typename RandomAccessIterator , typename Comparator &gt; </td></tr>
+<tr class="memitem:abbdb25eefda43c164a26b58c7e845798"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesort.html#abbdb25eefda43c164a26b58c7e845798">introSort</a> (RandomAccessIterator first, RandomAccessIterator last, Comparator comparator)</td></tr>
+<tr class="memdesc:abbdb25eefda43c164a26b58c7e845798"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sorts the range [first, last[ using intro sort algorithm.  <a href="#abbdb25eefda43c164a26b58c7e845798">More...</a><br /></td></tr>
+<tr class="separator:abbdb25eefda43c164a26b58c7e845798"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A namespace containing a collection of sorting algorithms. </p>
@@ -479,6 +491,145 @@ template&lt;typename RandomAccessIterator &gt; </div>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="abe7e05b478c4cc520be65188e13bceef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe7e05b478c4cc520be65188e13bceef">&#9670;&nbsp;</a></span>introSort() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RandomAccessIterator , typename Comparator &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void sort::introSort </td>
+          <td>(</td>
+          <td class="paramtype">RandomAccessIterator&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RandomAccessIterator&#160;</td>
+          <td class="paramname"><em>last</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Comparator&#160;</td>
+          <td class="paramname"><em>comparator</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>remRecursionDepth</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sorts the range [first, last[ using intro sort algorithm. </p>
+<p>Runs in O(nlogn) in the average case and O(nlogn) in the worst case. Has a space complexity of O(1). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>An iterator pointing to the first element in the range. </td></tr>
+    <tr><td class="paramname">last</td><td>An iterator pointing to the element that comes after the last element in the range. </td></tr>
+    <tr><td class="paramname">comparator</td><td>The comparator boolean function used to compare each two elements while sorting. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="namespacesort.html#a62748635f2900ee96b1508496ca96278" title="Partitions a range around a pivot using Lomuto partitioning algorithm and returns an iterator pointin...">lomutoPartitioning()</a> </dd></dl>
+
+</div>
+</div>
+<a id="ab9b66d661d74f8a2b3337b4aafe8a4b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9b66d661d74f8a2b3337b4aafe8a4b0">&#9670;&nbsp;</a></span>introSort() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RandomAccessIterator &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void sort::introSort </td>
+          <td>(</td>
+          <td class="paramtype">RandomAccessIterator&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RandomAccessIterator&#160;</td>
+          <td class="paramname"><em>last</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sorts the range [first, last[ using intro sort algorithm. </p>
+<p>Runs in O(nlogn) in the average case and O(nlogn) in the worst case. Has a space complexity of O(1). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>An iterator pointing to the first element in the range. </td></tr>
+    <tr><td class="paramname">last</td><td>An iterator pointing to the element that comes after the last element in the range. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="namespacesort.html#a62748635f2900ee96b1508496ca96278" title="Partitions a range around a pivot using Lomuto partitioning algorithm and returns an iterator pointin...">lomutoPartitioning()</a> </dd></dl>
+
+</div>
+</div>
+<a id="abbdb25eefda43c164a26b58c7e845798"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbdb25eefda43c164a26b58c7e845798">&#9670;&nbsp;</a></span>introSort() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RandomAccessIterator , typename Comparator &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void sort::introSort </td>
+          <td>(</td>
+          <td class="paramtype">RandomAccessIterator&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RandomAccessIterator&#160;</td>
+          <td class="paramname"><em>last</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Comparator&#160;</td>
+          <td class="paramname"><em>comparator</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sorts the range [first, last[ using intro sort algorithm. </p>
+<p>Runs in O(nlogn) in the average case and O(nlogn) in the worst case. Has a space complexity of O(1). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>An iterator pointing to the first element in the range. </td></tr>
+    <tr><td class="paramname">last</td><td>An iterator pointing to the element that comes after the last element in the range. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="namespacesort.html#a62748635f2900ee96b1508496ca96278" title="Partitions a range around a pivot using Lomuto partitioning algorithm and returns an iterator pointin...">lomutoPartitioning()</a> </dd></dl>
 
 </div>
 </div>
