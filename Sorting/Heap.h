@@ -4,12 +4,12 @@
 #define Heap_H
 /**
 * @file Heap.h
-* A header file containing the declaration and the
-* implementation of the Heap class and the heap operations.
+* A header file containing the declaration of the heap
+* interface.
 * @author Mohammed Abdelbarry.
 */
 /**
-* A utility class that performs the heap operations on ranges.
+* An interface that defines a heap.
 * @author Mohammed Abdelbarry.
 */
 template<typename Type, typename Comparator =  std::greater_equal<Type>>
@@ -23,7 +23,7 @@ public:
     * @param position The starting position of the heapify operation.
     */
     template<typename RandomAccessIterator>
-    void heapify(RandomAccessIterator first, RandomAccessIterator last, RandomAccessIterator position);
+    static void heapify(RandomAccessIterator first, RandomAccessIterator last, RandomAccessIterator position);
     /**
     * Transforms a range into a heap.
     * Has a worst case time of O(n).
@@ -31,7 +31,7 @@ public:
     * @param second An iterator pointing to the second element in the range.
     */
     template<typename RandomAccessIterator>
-    void buildHeap(RandomAccessIterator first, RandomAccessIterator last);
+    static void buildHeap(RandomAccessIterator first, RandomAccessIterator last);
     /**
     * Performs the operation sift-up on a range of elements.
     * Has a worst case time of O(logn).
@@ -39,28 +39,53 @@ public:
     * @param position The starting position of the sift-up operation.
     */
     template<typename RandomAccessIterator>
-    void siftUp(RandomAccessIterator first, RandomAccessIterator position);
+    static void siftUp(RandomAccessIterator first, RandomAccessIterator position);
+    /**
+    * Inserts an element to the heap.
+    * @param element the element to be inserted.
+    */
+    virtual void insert(Type element) = 0;
+    /**
+    * Removes and returns the root of the heap.
+    * @return The value at the root of the heap.
+    * @throw std::underflow_error When the heap is empty.
+    */
+    virtual Type extractRoot() = 0;
+    /**
+    * Retrieves and returns the root of the heap.
+    * @return The value at the root of the heap.
+    */
+    virtual Type getRoot() = 0;
+    /**
+    * Returns the size of the heap.
+    * @return The size of the heap.
+    */
+    virtual int size() = 0;
+    /**
+    * Checks whether the heap is empty or not.
+    * @return A boolean indicating whether the heap is empty or not.
+    */
+    virtual bool isEmpty() = 0;
 private:
-    Comparator comparator;
     /**
     * Returns the index of the parent of a node.
     * @return the index of the parent of a node.
     */
-    inline int parent(int index) {
+    static inline int parent(int index) {
         return (index - 1) >> 1;
     }
     /**
     * Returns the index of the left child of a node.
     * @return the index of the left child of a node.
     */
-    inline int left(int index) {
+    static inline int left(int index) {
         return (index << 1) + 1;
     }
     /**
     * Returns the index of the right child of a node.
     * @return the index of the right child of a node.
     */
-    inline int right(int index) {
+    static inline int right(int index) {
         return (index << 1) + 2;
     }
 };
@@ -72,13 +97,14 @@ private:
 template<typename Type, typename Comparator>
 template<typename RandomAccessIterator>
 void Heap<Type, Comparator>::heapify(RandomAccessIterator first, RandomAccessIterator last, RandomAccessIterator position) {
+    Comparator comparator;
     int index = position - first;
     int size = last - first;
     if (index < 0) {
         return;
     }
-    int left = this->left(index);
-    int right = this->right(index);
+    int left = Heap<Type, Comparator>::left(index);
+    int right = Heap<Type, Comparator>::right(index);
     int largest = index;
     if (left <  size && !comparator(first[index], first[left])) {
         largest = left;
@@ -106,12 +132,13 @@ void Heap<Type, Comparator>::buildHeap(RandomAccessIterator first, RandomAccessI
 template<typename Type, typename Comparator>
 template<typename RandomAccessIterator>
 void Heap<Type, Comparator>::siftUp(RandomAccessIterator first, RandomAccessIterator position) {
+    Comparator comparator;
     int index = position - first;
     if (index < 0) {
         return;
     }
-    int parent = this->parent(index);
-    if (!comparator(first[parent], first[index])) {
+    int parent = Heap<Type, Comparator>::parent(index);
+    if (parent >= 0 && !comparator(first[parent], first[index])) {
         int temp = first[parent];
         first[parent] = first[index];
         first[index] = temp;

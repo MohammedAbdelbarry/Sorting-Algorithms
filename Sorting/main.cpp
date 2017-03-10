@@ -7,9 +7,10 @@
 #include <string>
 #include <sstream>
 #include <stdexcept>
+#include <algorithm>
 #include "Sortings.h"
 #include "PriorityQueue.h"
-#include "Heap.h"
+std::vector<double> n, merge, quick, heap, std_sort, std_stable_sort, bubble, insertion, selection;
 
 template <typename Number>
 std::string toString (Number num) {
@@ -18,7 +19,6 @@ std::string toString (Number num) {
      return stringStream.str();
 }
 
-std::vector<double> n, merge, quick, heap, std_sort, std_stable_sort, bubble, insertion, selection;
 template<typename Iterator>
 void printRange(Iterator first, Iterator last) {
     for (auto it = first ; it < last ; it++) {
@@ -162,7 +162,106 @@ void testSeveralArrays() {
     writeVectors();
 }
 
+void testHeap(int n) {
+    std::vector<double> vecs;
+    vecs.reserve(n);
+    for (int i = 0 ; i < n ; i++) {
+        vecs.push_back(i);
+    }
 
+    std::random_shuffle(all(vecs));
+    sort::heapSort(all(vecs), std::less<double>());
+    std::cout << std::endl;
+    if (!std::is_sorted(all(vecs), std::less<double>()))
+        throw std::runtime_error("Heap sort failed to sort with std::less");
+    std::random_shuffle(all(vecs));
+    sort::heapSort(all(vecs), std::greater<double>());
+    if (!std::is_sorted(all(vecs), std::greater<double>()))
+        throw std::runtime_error("Heap sort failed to sort with std::greater");
+
+    std::random_shuffle(all(vecs));
+    sort::heapSort(all(vecs), std::less_equal<double>());
+    if (!std::is_sorted(all(vecs), std::less_equal<double>()))
+        throw std::runtime_error("Heap sort failed to sort with std::less_equal");
+
+    std::random_shuffle(all(vecs));
+    sort::heapSort(all(vecs), std::greater_equal<double>());
+    if (!std::is_sorted(all(vecs), std::greater_equal<double>()))
+        throw std::runtime_error("Heap sort failed to sort with std::greater_equal");
+
+    std::random_shuffle(all(vecs));
+    PriorityQueue<double, std::less<double>> pq1(all(vecs));
+    for (int i = 0 ; i < vecs.size() ; i++) {
+        vecs[i] = pq1.pop();
+    }
+    if (!std::is_sorted(all(vecs), std::less<double>()))
+        throw std::runtime_error("priority queue sort failed to sort with std::less and copying");
+
+    std::random_shuffle(all(vecs));
+    PriorityQueue<double, std::less_equal<double>> pq2(all(vecs));
+    for (int i = 0 ; i < vecs.size() ; i++) {
+        vecs[i] = pq2.pop();
+    }
+    if (!std::is_sorted(all(vecs), std::less_equal<double>()))
+        throw std::runtime_error("priority queue sort failed to sort with std::less_equal and copying");
+
+    std::random_shuffle(all(vecs));
+    PriorityQueue<double, std::greater<double>> pq3(all(vecs));
+    for (int i = 0 ; i < vecs.size() ; i++) {
+        vecs[i] = pq3.pop();
+    }
+    if (!std::is_sorted(all(vecs), std::greater<double>()))
+        throw std::runtime_error("priority queue sort failed to sort with std::greater and copying");
+
+    std::random_shuffle(all(vecs));
+    PriorityQueue<double, std::greater_equal<double>> pq4(all(vecs));
+    for (int i = 0 ; i < vecs.size() ; i++) {
+        vecs[i] = pq4.pop();
+    }
+    if (!std::is_sorted(all(vecs), std::greater_equal<double>()))
+        throw std::runtime_error("priority queue sort failed to sort with std::greater_equal and copying");
+
+    std::random_shuffle(all(vecs));
+    for (auto el : vecs) {
+        pq1.push(el);
+    }
+    for (int i = 0 ; i < vecs.size() ; i++) {
+        vecs[i] = pq1.pop();
+    }
+    if (!std::is_sorted(all(vecs), std::less<double>()))
+        throw std::runtime_error("priority queue sort failed to sort with std::less and insertion");
+
+    std::random_shuffle(all(vecs));
+    for (auto el : vecs) {
+        pq2.push(el);
+    }
+    for (int i = 0 ; i < vecs.size() ; i++) {
+        vecs[i] = pq2.pop();
+    }
+    if (!std::is_sorted(all(vecs), std::less_equal<double>()))
+        throw std::runtime_error("priority queue sort failed to sort with std::less_equal and insertion");
+
+    std::random_shuffle(all(vecs));
+    for (auto el : vecs) {
+        pq3.push(el);
+    }
+    for (int i = 0 ; i < vecs.size() ; i++) {
+        vecs[i] = pq3.pop();
+    }
+    if (!std::is_sorted(all(vecs), std::greater<double>()))
+        throw std::runtime_error("priority queue sort failed to sort with std::greater and insertion");
+
+    std::random_shuffle(all(vecs));
+    for (auto el : vecs) {
+        pq4.push(el);
+    }
+    for (int i = 0 ; i < vecs.size() ; i++) {
+        vecs[i] = pq4.pop();
+    }
+    if (!std::is_sorted(all(vecs), std::greater_equal<double>()))
+        throw std::runtime_error("priority queue sort failed to sort with std::greater_equal and insertion");
+
+}
 
 int main()
 {
@@ -175,23 +274,24 @@ int main()
     vec.push_back(-19);
     vec.push_back(50);
     printRange(all(vec));
-    sort::insertionSort(all(vec), std::less<int>());
+    sort::heapSort(all(vec), std::less<int>());
     printRange(all(vec));
     //sort::heapSort(vec.begin(), vec.end());
 //    printRange(all(vec));
-    PriorityQueue<int, std::greater_equal<int>> pq(all(vec));
+    PriorityQueue<int, std::less<int>> pq(all(vec));
     for (auto el : vec) {
-        std::cout << pq.extractRoot() << ' ';
+        std::cout << pq.pop() << ' ';
     }
     std::cout << std::endl;
     for (auto el : vec) {
-        pq.insert(el);
+        pq.push(el);
     }
     for (auto el : vec) {
-        std::cout << pq.extractRoot() << ' ';
+        std::cout << pq.pop() << ' ';
     }
+    testHeap(100000);
     //std::vector<double> vecs;
-    testSeveralArrays();
+//    testSeveralArrays();
     //readArray("D:\\Whatever\\C++ Projects\\Data Structure\\Lab1\\Datasets\\test139Random100k.txt", vecs);
 //    printRange(all(vecs));
 //    testPerformance(sort::heapSort, all(vecs), std::greater<double>());

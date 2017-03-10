@@ -46,14 +46,13 @@ namespace sort {
     void heapSort(RandomAccessIterator first, RandomAccessIterator last, Comparator comparator) {
         auto origLast = last;
         using Type = typename std::iterator_traits<RandomAccessIterator>::value_type;
-        Heap<Type, Comparator> heap;
-        heap.buildHeap(first, last);
+        Heap<Type, Comparator>::buildHeap(first, last);
         int size = last - first;
         for (int i = size - 1; i > 0; i--) {
             Type temp = first[0];
             first[0] = first[i];
             first[i] = temp;
-            heap.heapify(first, --last, first);
+            Heap<Type, Comparator>::heapify(first, --last, first);
         }
         std::reverse(first, origLast);
     }
