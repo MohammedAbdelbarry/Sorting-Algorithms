@@ -33,6 +33,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="Heap.h" />
+		<Unit filename="HeapImpl.h" />
 		<Unit filename="PriorityQueue.h" />
 		<Unit filename="Sortings.h" />
 		<Unit filename="main.cpp" />

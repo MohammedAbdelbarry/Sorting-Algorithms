@@ -10,7 +10,7 @@
 #include <algorithm>
 #include "Sortings.h"
 #include "PriorityQueue.h"
-std::vector<double> n, merge, quick, heap, std_sort, std_stable_sort, bubble, insertion, selection;
+std::vector<double> n, merge, quick, heap, std_sort, std_stable_sort, bubble, insertion, selection, intro;
 
 template <typename Number>
 std::string toString (Number num) {
@@ -110,6 +110,15 @@ void testPerformance(////function<void(RandomAccessIterator, RandomAccessIterato
     if(!std::is_sorted(vecs.begin(), vecs.end(), comparator))
         throw std::runtime_error("std::stable_sort Failed to Sort");
 
+    std::copy(first, last, vecs.begin());
+    start = std::chrono::high_resolution_clock::now();
+    sort::introSort(vecs.begin(), vecs.end(), comparator);
+    end = std::chrono::high_resolution_clock::now();
+    elapsedTime = end - start;
+    intro.push_back(elapsedTime.count());
+    if(!std::is_sorted(vecs.begin(), vecs.end(), comparator))
+        throw std::runtime_error("std::stable_sort Failed to Sort");
+
 }
 
 void writeVectorToFile(auto&& vec, std::string path) {
@@ -130,9 +139,19 @@ void writeVectors() {
     writeVectorToFile(selection, path + "selection.txt");
     writeVectorToFile(std_sort, path + "std_sort.txt");
     writeVectorToFile(std_stable_sort, path + "std_stable_sort.txt");
-//    writeVectorToFile(std_sort_heap, path + "std_sort_heap.txt");
+    writeVectorToFile(intro, path + "intro.txt");
 }
-
+/*template<typename RandomAccessIterator, typename Comparator>
+void testPerformanceIntro(RandomAccessIterator first, RandomAccessIterator last, Comparator comparator) {
+    std::vector<double> vecs(first, last);
+    std::chrono::time_point<std::chrono::high_resolution_clock> start = std::chrono::high_resolution_clock::now();
+    sort::introSort(vecs.begin(), vecs.end(), comparator);
+    std::chrono::time_point<std::chrono::high_resolution_clock> end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsedTime = end - start;
+    intro.push_back(elapsedTime.count());
+    if(!std::is_sorted(vecs.begin(), vecs.end(), comparator))
+        throw std::runtime_error("Merge Sort Failed to Sort");
+}*/
 void testSeveralArrays() {
     const int NUM_OF_TEST_CASES = 201;
     n.reserve(NUM_OF_TEST_CASES);
@@ -153,6 +172,8 @@ void testSeveralArrays() {
     std_sort[0] = 0;
     std_stable_sort.reserve(NUM_OF_TEST_CASES);
     std_stable_sort[0] = 0;
+    intro.reserve(NUM_OF_TEST_CASES);
+    intro[0] = 0;
     std::vector<double> vec;
     for (int i = 1 ; i < NUM_OF_TEST_CASES ; i++) {
         std::string fileName = std::string("D:\\Whatever\\C++ Projects\\Data Structure\\Lab1\\Datasets\\random\\test") + toString(i) + ".txt";
@@ -289,7 +310,7 @@ int main()
     for (auto el : vec) {
         std::cout << pq.pop() << ' ';
     }
-    testHeap(100000);
+//    testHeap(100000);
     //std::vector<double> vecs;
 //    testSeveralArrays();
     //readArray("D:\\Whatever\\C++ Projects\\Data Structure\\Lab1\\Datasets\\test139Random100k.txt", vecs);

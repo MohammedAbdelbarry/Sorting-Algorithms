@@ -356,7 +356,59 @@ namespace sort {
         using Type = typename std::iterator_traits<RandomAccessIterator>::value_type;
         quickSort(first, last, std::less<Type>());
     }
-
+    /**
+    * Sorts the range [first, last[ using intro sort algorithm.
+    * Runs in O(nlogn) in the average case and O(nlogn) in the worst case.
+    * Has a space complexity of O(1).
+    * @param first An iterator pointing to the first element in the
+    * range.
+    * @param last An iterator pointing to the element that comes after the last element
+    * in the range.
+    * @param comparator The comparator boolean function used to compare each two elements
+    * while sorting.
+    * @see lomutoPartitioning()
+    */
+    template<typename RandomAccessIterator, typename Comparator>
+    void introSort(RandomAccessIterator first, RandomAccessIterator last, Comparator comparator, int remRecursionDepth) {
+        if(remRecursionDepth == 0) {
+            heapSort(first, last, comparator);
+        }
+        if (first < last) {
+            auto pivot = lomutoPartitioning(first, last, comparator);
+            introSort(first, pivot, comparator, remRecursionDepth - 1);
+            introSort(pivot + 1, last, comparator, remRecursionDepth - 1);
+        }
+    }
+    /**
+    * Sorts the range [first, last[ using intro sort algorithm.
+    * Runs in O(nlogn) in the average case and O(nlogn) in the worst case.
+    * Has a space complexity of O(1).
+    * @param first An iterator pointing to the first element in the
+    * range.
+    * @param last An iterator pointing to the element that comes after the last element
+    * in the range.
+    * @see lomutoPartitioning()
+    */
+    template<typename RandomAccessIterator>
+    void introSort(RandomAccessIterator first, RandomAccessIterator last) {
+        using Type = typename std::iterator_traits<RandomAccessIterator>::value_type;
+        introSort(first, last, std::less<Type>());
+    }
+    /**
+    * Sorts the range [first, last[ using intro sort algorithm.
+    * Runs in O(nlogn) in the average case and O(nlogn) in the worst case.
+    * Has a space complexity of O(1).
+    * @param first An iterator pointing to the first element in the
+    * range.
+    * @param last An iterator pointing to the element that comes after the last element
+    * in the range.
+    * @see lomutoPartitioning()
+    */
+    template<typename RandomAccessIterator, typename Comparator>
+    void introSort(RandomAccessIterator first, RandomAccessIterator last, Comparator comparator) {
+        int maxDepth = floor(log2(std::distance(first, last))) * 2;
+        introSort(first, last, comparator, maxDepth);
+    }
 }
 
 #endif // Sortings_H
