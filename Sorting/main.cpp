@@ -295,7 +295,7 @@ int main()
     vec.push_back(-19);
     vec.push_back(50);
     printRange(all(vec));
-    sort::heapSort(all(vec), std::less<int>());
+    sort::quickSort(all(vec), std::less<int>());
     printRange(all(vec));
     //sort::heapSort(vec.begin(), vec.end());
 //    printRange(all(vec));
