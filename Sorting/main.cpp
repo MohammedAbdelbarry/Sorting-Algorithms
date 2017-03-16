@@ -287,10 +287,10 @@ void testHeap(int n) {
 int main()
 {
     std::vector<int> vec;
-    vec.push_back(-1);
+    vec.push_back(1);
     vec.push_back(1);
     vec.push_back(50);
-    vec.push_back(3);
+    vec.push_back(1);
     vec.push_back(4);
     vec.push_back(-19);
     vec.push_back(50);
@@ -310,6 +310,16 @@ int main()
     for (auto el : vec) {
         std::cout << pq.pop() << ' ';
     }
+    long long hamdy = 0;
+    auto start = std::chrono::high_resolution_clock::now();
+    for(int i = 0; i < 100000 ; i++) {
+        for (int j = 0 ; j < 100000 ; j++) {
+            hamdy++;
+        }
+    }
+    auto end = std::chrono::high_resolution_clock::now();
+    auto elapsedTime = end - start;
+    std::cout << elapsedTime.count();
 //    testHeap(100000);
     //std::vector<double> vecs;
 //    testSeveralArrays();
