@@ -372,6 +372,7 @@ namespace sort {
     void introSort(RandomAccessIterator first, RandomAccessIterator last, Comparator comparator, int remRecursionDepth) {
         if(remRecursionDepth == 0) {
             heapSort(first, last, comparator);
+            return;
         }
         if (first < last) {
             auto pivot = lomutoPartitioning(first, last, comparator);
@@ -392,7 +393,8 @@ namespace sort {
     template<typename RandomAccessIterator>
     void introSort(RandomAccessIterator first, RandomAccessIterator last) {
         using Type = typename std::iterator_traits<RandomAccessIterator>::value_type;
-        introSort(first, last, std::less<Type>());
+        int maxDepth = floor(log2(std::distance(first, last))) * 2;
+        introSort(first, last, std::less<Type>(), maxDepth);
     }
     /**
     * Sorts the range [first, last[ using intro sort algorithm.
